@@ -10,4 +10,12 @@ function getComputerChoice() {
     }
 }
 
+function getHumanChoice() {
+    let choice = prompt("Enter either 'Rock', 'Paper', or 'Scissors' without the quotation marks:").toUpperCase();
+    console.log(choice);
+
+}
+
 getComputerChoice();
+
+getHumanChoice();
