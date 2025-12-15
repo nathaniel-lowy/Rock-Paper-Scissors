@@ -11,6 +11,7 @@ this may change at a later date for practice purposes.
 
 let humanScore = 0;
 let computerScore = 0;
+let gameOver = false;
 
 const rockButton = document.querySelector("#rock");
 const paperButton = document.querySelector("#paper");
@@ -19,10 +20,11 @@ const scissorsButton = document.querySelector("#scissors");
 const userScoreDiv = document.querySelector("#userScore");
 const computerScoreDiv = document.querySelector("#computerScore");
 const resultDiv = document.querySelector("#result");
+const gameWinner = document.querySelector("#gameWinner");
 
-rockButton.addEventListener("click", () => {playRound("ROCK")});
-paperButton.addEventListener("click", () => {playRound("PAPER")});
-scissorsButton.addEventListener("click", () => {playRound("SCISSORS")});
+rockButton.addEventListener("click", () => {playGame("ROCK")});
+paperButton.addEventListener("click", () => {playGame("PAPER")});
+scissorsButton.addEventListener("click", () => {playGame("SCISSORS")});
 
 
 function getComputerChoice() {
@@ -70,26 +72,32 @@ function playRound(humanChoice) {
             resultDiv.textContent =  "You win! Scissors beat paper!";
         }
     }
-
-    userScoreDiv.textContent = humanScore;
-    computerScoreDiv.textContent = computerScore;
+    updateScore();
 
     if (humanScore === 5) {
-        const gameWinner = document.createElement("p");
         gameWinner.textContent = "YOU REACHED 5 FIRST! YOU WIN THE GAME!";
-        document.querySelector("#scores").appendChild(gameWinner);
+        gameOver = true;
     } else if (computerScore === 5) {
-        const gameWinner = document.createElement("p");
         gameWinner.textContent = "THE COMPUTER REACHED 5 FIRST! IT WINS THE GAME!";
-        document.querySelector("#scores").appendChild(gameWinner);
+        gameOver = true;
     }
+}
 
-
-
+function updateScore() {
+    userScoreDiv.textContent = humanScore;
+    computerScoreDiv.textContent = computerScore;
 }
 
 
-function playGame() {
-    
+function playGame(choice) {
+    if (gameOver) {
+        humanScore = 0;
+        computerScore = 0;
+        updateScore();
+        gameWinner.textContent = "";
+        gameOver = false;
+    } else {
+        playRound(choice);
+    }
 }
 // playGame();
