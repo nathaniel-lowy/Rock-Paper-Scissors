@@ -75,11 +75,11 @@ function playRound(humanChoice) {
     updateScore();
 
     if (humanScore === 5) {
-        gameWinner.textContent = "YOU REACHED 5 FIRST! YOU WIN THE GAME!";
+        gameWinner.textContent = "YOU WIN THE GAME!";
         resultDiv.textContent = "Click a button to reset.";
         gameOver = true;
     } else if (computerScore === 5) {
-        gameWinner.textContent = "THE COMPUTER REACHED 5 FIRST! IT WINS THE GAME!";
+        gameWinner.textContent = "COM WINS THE GAME!";
         resultDiv.textContent = "Click a button to reset.";
         gameOver = true;
     }
