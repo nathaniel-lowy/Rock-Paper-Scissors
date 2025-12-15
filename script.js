@@ -9,6 +9,22 @@ this may change at a later date for practice purposes.
 
 */
 
+let humanScore = 0;
+let computerScore = 0;
+
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+
+const userScoreDiv = document.querySelector("#userScore");
+const computerScoreDiv = document.querySelector("#computerScore");
+const resultDiv = document.querySelector("#result");
+
+rockButton.addEventListener("click", () => {playRound("ROCK")});
+paperButton.addEventListener("click", () => {playRound("PAPER")});
+scissorsButton.addEventListener("click", () => {playRound("SCISSORS")});
+
+
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3);
     if (choice === 0) {
@@ -20,59 +36,60 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let choice = prompt("Enter either 'Rock', 'Paper', or 'Scissors' without the quotation marks:").toUpperCase();
-    return choice;
+
+function playRound(humanChoice) {
+    const computerChoice = getComputerChoice();
+
+    if (humanChoice === computerChoice) {
+        resultDiv.textContent = "You tied!";
+        return;
+    }
+
+    if (humanChoice === "ROCK") {
+        if (computerChoice === "PAPER") {
+            computerScore++;
+            resultDiv.textContent = "You lose! Paper beats rock!";
+        } else {
+            humanScore++;
+            resultDiv.textContent = "You win! Rock beats scissors!";
+        }
+    } else if (humanChoice === "PAPER") {
+        if (computerChoice === "SCISSORS") {
+            computerScore++;
+            resultDiv.textContent =  "You lose! Scissors beat paper!";
+        } else {
+            humanScore++;
+            resultDiv.textContent =  "You win! Paper beats rock!";
+        }
+    } else {
+        if (computerChoice === "ROCK") {
+            computerScore++;
+            resultDiv.textContent =  "You lose! Rock beats scissors!";
+        } else {
+            humanScore++;
+            resultDiv.textContent =  "You win! Scissors beat paper!";
+        }
+    }
+
+    userScoreDiv.textContent = humanScore;
+    computerScoreDiv.textContent = computerScore;
+
+    if (humanScore === 5) {
+        const gameWinner = document.createElement("p");
+        gameWinner.textContent = "YOU REACHED 5 FIRST! YOU WIN THE GAME!";
+        document.querySelector("#scores").appendChild(gameWinner);
+    } else if (computerScore === 5) {
+        const gameWinner = document.createElement("p");
+        gameWinner.textContent = "THE COMPUTER REACHED 5 FIRST! IT WINS THE GAME!";
+        document.querySelector("#scores").appendChild(gameWinner);
+    }
+
+
+
 }
+
 
 function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-
-    function playRound(humanChoice, computerChoice) {
-        // console.log("Human choice = " + humanChoice);
-        // console.log("Computer choice = " + computerChoice);
-
-        if (humanChoice === computerChoice) {
-            return "You tied!";
-        }
-
-        if (humanChoice === "ROCK") {
-            if (computerChoice === "PAPER") {
-                computerScore++;
-                return "You lose! Paper beats rock!";
-            } else {
-                humanScore++;
-                return "You win! Rock beats scissors!";
-            }
-        } else if (humanChoice === "PAPER") {
-            if (computerChoice === "SCISSORS") {
-                computerScore++;
-                return "You lose! Scissors beat paper!";
-            } else {
-                humanScore++;
-                return "You win! Paper beats rock!";
-            }
-        } else {
-            if (computerChoice === "ROCK") {
-                computerScore++;
-                return "You lose! Rock beats scissors!";
-            } else {
-                humanScore++;
-                return "You win! Scissors beat paper!";
-            }
-        }
-
-    }
-
-    for (let i = 0; i < 5; i++) {
-        console.log(playRound(getHumanChoice(), getComputerChoice()));
-    }
-
-    console.log("Human Score: " + humanScore);
-    console.log("Computer Score: " + computerScore);
-
+    
 }
-
-
-playGame();
+// playGame();
