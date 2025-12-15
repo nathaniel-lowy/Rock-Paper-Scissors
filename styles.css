@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #070715;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+button {
+    flex: 1;
+    padding: 12px;
+    margin: 0;
+    width: 80px;
+    height: 40px;
+}
+
+#scores {
+    text-align: center;
+    font-size: 2rem;
+}
+
+#scores #span {
+    padding: 12px;
+}
+
+#scores #gameWinner {
+    font-size: 1.4rem;
+}
